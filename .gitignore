@@ -8,6 +8,7 @@ log/*.log*
 tmp/**/*
 .sass-cache/
 public/assets/
+public/user/
 config/database.yml
 config/mongoid.yml
 config/config.yml

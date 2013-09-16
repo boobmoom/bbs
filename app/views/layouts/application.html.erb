@@ -47,11 +47,6 @@
       <div class="hidden-phone" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
         <%= render_breadcrumb %>
       </div>
-      <div class="feed_link hidden-phone">
-        <% if not mobile? %>
-          <%= link_to(raw("<span class='icon icons_rss'></span> Feed"), feed_topics_url, :title => t("topics.subscribe_with_rss", :name => Setting.app_name), :class => "feed") %>
-        <% end %>
-      </div>
     <% end %>
 
     <%= notice_message %>
@@ -79,25 +74,12 @@
     FAYE_SERVER_URL = "<%= Setting.faye_server %>";
     <% if current_user %>
       CURRENT_USER_ACCESS_TOKEN = "<%= current_user.temp_access_token %>";
+      if (FAYE_SERVER_URL) {
+        App.initNotificationSubscribe();
+      }
     <% end %>
-    if (FAYE_SERVER_URL) {
-      App.initNotificationSubscribe();
-    }
   </script>
   <%= yield :scripts %>
-  <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<%= Setting.google_analytics_key %>']);
-      _gaq.push(['_setSiteSpeedSampleRate', 100]);
-      _gaq.push(['_trackPageview']);
-
-      <%= Garelic::Timing %>
-
-      (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-  </script>
+  
 </body>
 </html>

@@ -16,7 +16,7 @@
 #= require jquery.autogrow-textarea
 #= require jquery.html5-fileupload
 #= require social-share-button
-#= require jquery.atwho
+
 #= require nprogress
 #= require emoji_list
 #= require faye
@@ -94,11 +94,7 @@ window.App =
 
   atReplyable : (el, logins) ->
     return if logins.length == 0
-    $(el).atwho
-      at : "@"
-      data : logins
-      search_key : "search"
-      tpl : "<li data-value='${login}'>${login} <small>${name}</small></li>"
+    
     true
 
   initForDesktopView : () ->
